@@ -1,4 +1,10 @@
+# import random
+# import time
+# from statistics import mean
+
 # TO-DO: complete the helpe function below to merge 2 sorted arrays
+
+
 def merge(arrA, arrB):
     lengthA = len(arrA)
     lengthB = len(arrB)
@@ -117,3 +123,28 @@ def timsort(arr):
         return merge_arr(result)
 
     return merge_arr(runs)
+
+
+# merge_sorts = []
+# merge_runtimes = []
+# tim_sorts = []
+# timsort_runtimes = []
+# for i in range(1000):
+#     arr = random.sample(range(200), 100)
+#     merge_sorts.append(arr)
+#     tim_sorts.append(arr)
+
+# for sort in merge_sorts:
+#     start_time = time.time()
+#     merge_sort(sort)
+#     end_time = time.time()
+#     merge_runtimes.append(end_time - start_time)
+
+# for sort in tim_sorts:
+#     start_time = time.time()
+#     timsort(sort)
+#     end_time = time.time()
+#     timsort_runtimes.append(end_time - start_time)
+
+# print(f"avg merge runtime: {mean(merge_runtimes)} seconds")
+# print(f"avg timsort runtime: {mean(timsort_runtimes)} seconds")
