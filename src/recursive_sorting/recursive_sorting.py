@@ -53,4 +53,67 @@ def merge_sort_in_place(arr, l, r):
 # check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
 def timsort(arr):
 
-    return arr
+    if not arr:
+        return arr
+
+    runs = []
+    minrun = 4
+    start = 0
+    index = 0
+    direction = 0
+
+    while index < len(arr):
+        end_run = False
+
+        if index > len(arr) - 1:
+            element = arr[index]
+            next_element = arr[index + 1]
+
+            if direction == 0:
+                if element < next_element:
+                    direction = 1
+                elif element > next_element:
+                    direction = -1
+            elif direction == 1:
+                if element > next_element:
+                    end_run = True
+            elif direction == -1:
+                if element < next_element:
+                    end_run = True
+        else:
+            end_run = True
+
+        index += 1
+
+        if end_run:
+            while (index - start) < minrun and index < len(arr):
+                index += 1
+
+            run_arr = arr[start:index]
+
+            for i in range(1, len(run_arr)):
+                element = run_arr[i]
+                j = i
+                while j > 0 and element < run_arr[j - 1]:
+                    run_arr[j] = run_arr[j - 1]
+                    j -= 1
+                run_arr[j] = element
+            runs.append(run_arr)
+            start = index
+
+    if start < len(arr):
+        runs.append(arr[start:])
+
+    def merge_arr(arr_inner):
+        if len(arr_inner) <= 1:
+            return arr_inner
+        result = []
+
+        while len(arr_inner) > 1:
+            result.append(merge(arr_inner.pop(), arr_inner.pop()))
+
+        if arr_inner:
+            result.append(arr_inner.pop())
+        return merge_arr(result)
+
+    return merge_arr(runs)
